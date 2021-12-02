@@ -42,7 +42,7 @@ export class PizzaOrderEffects {
           return this.orderService.getOrders().pipe(
             map((OrderList) => {
               //Now sorting the array by Order Id Ascending.
-              OrderList = OrderList.sort((n1:Pizza,n2:Pizza) => n1.OrderId - n2.OrderId);
+              OrderList = OrderList.sort((n1:any,n2:any) => n1.OrderId - n2.OrderId);
               //Finally returning the status.
               return loadPizzaOrdersSuccess({ OrderList });
             })
