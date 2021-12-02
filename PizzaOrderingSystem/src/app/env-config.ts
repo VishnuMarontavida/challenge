@@ -1,3 +1,4 @@
 export enum pizzaAPIs{
-    authAPI=`/api/auth`
+    authAPI=`/api/auth`,
+    orderGetAndPost = `api/orders`
 }

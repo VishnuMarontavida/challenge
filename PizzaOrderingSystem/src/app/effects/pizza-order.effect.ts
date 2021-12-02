@@ -12,6 +12,8 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import {
+  addOrder,
+  addOrderSuccess,
   dummyAction,
   loadPizzaOrders,
   loadPizzaOrdersSuccess
@@ -53,5 +55,19 @@ export class PizzaOrderEffects {
     );
   });
 
+
+  // addPost$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(addOrder),
+  //     mergeMap((action) => {
+  //       return this.orderService.addPost(action.order).pipe(
+  //         map((data) => {
+  //           const post = { ...action.order, id: data.name };
+  //           return addOrderSuccess({ order });
+  //         })
+  //       );
+  //     })
+  //   );
+  // });
 
 }

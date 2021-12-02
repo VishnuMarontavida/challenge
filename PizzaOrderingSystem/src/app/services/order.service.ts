@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { pizzaAPIs } from '../env-config';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class OrderService {
   //Used to get all Pizza Orders from the API.
   getOrders(): Observable<Pizza[]> {
     return this.http
-      .get<Pizza[]>(`api/orders`)
+      .get<Pizza[]>(pizzaAPIs.orderGetAndPost)
       .pipe(
         map((data: any) => {
           const orders: Pizza[] = [];
@@ -40,5 +41,20 @@ export class OrderService {
       );
   }
 
+  addPizzaOrder(order: Pizza): Observable<Pizza> {
 
+    var token = this.getAuthToken();
+    
+    const httpOptions = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    };
+
+    return this.http.post<Pizza>(pizzaAPIs.orderGetAndPost, order, httpOptions);
+  }
+
+  getAuthToken() {
+    var loggedinUserData: any = localStorage.getItem('userData');
+    if (loggedinUserData)
+      return loggedinUserData.access_token;
+  }
 }

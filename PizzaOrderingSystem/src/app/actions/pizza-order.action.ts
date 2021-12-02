@@ -10,4 +10,10 @@ export const loadPizzaOrdersSuccess = createAction(
   props<{ OrderList: Pizza[] }>()
 );
 
+export const addOrder = createAction(PizzaActionTypes.ADD_ORDER_ACTION, props<{ order: Pizza }>());
+export const addOrderSuccess = createAction(
+  PizzaActionTypes.ADD_ORDER_SUCCESS,
+  props<{ order: Pizza }>()
+);
+
 export const dummyAction = createAction('[dummy action]');

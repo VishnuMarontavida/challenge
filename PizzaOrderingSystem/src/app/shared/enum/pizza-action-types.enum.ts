@@ -5,6 +5,8 @@ export enum PizzaActionTypes {
     Pizza_Order_List = 'Pizza Order List',
     LOAD_ORDERS='[order page] Load Pizza Orders',
     LOAD_ORDERS_SUCCESS='[order page] Load Pizza Order List Success',
+    ADD_ORDER_ACTION = '[order page] add order',
+    ADD_ORDER_SUCCESS = '[order page] add order success',
     
     Login = 'Login',
     LOGIN_START = '[auth page] login start',
