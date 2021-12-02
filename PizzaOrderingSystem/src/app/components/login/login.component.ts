@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
         username: userName,
         password: password
       }
-      this.store.dispatch(setLoadingSpinner({ status: true }));
       this.store.dispatch(loginStart({userData}));
       //Todo : Now Iam not showing the error message in UI.Need to show that.
     }
