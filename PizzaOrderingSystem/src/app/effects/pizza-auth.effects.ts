@@ -34,14 +34,11 @@ export class AuthEffects {
        
         return this.authService.login(action.userData).pipe(
           map((data) => {
-            this.store.dispatch(setLoadingSpinner({ status: false }));
-            this.store.dispatch(setErrorMessage({ message: '' }));
             const user = this.authService.formatUser(data);
             this.authService.setUserInLocalStorage(user);
             return loginSuccess({ user, redirect: true });
           }),
           catchError((errResp) => {
-            this.store.dispatch(setLoadingSpinner({ status: false }));
             const errorMessage = this.authService.getErrorMessage(
               // errResp.error.error.message
               'INVALID_PASSWORD'
