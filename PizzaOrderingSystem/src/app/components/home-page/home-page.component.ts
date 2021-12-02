@@ -22,8 +22,7 @@ export class HomePageComponent implements OnInit {
   pizzaOrders: Observable<Pizza[]>;
   count: Observable<number>;
   ngOnInit(): void {
-    //Starting the loading animation.
-    this.store.dispatch(setLoadingSpinner({ status: true }));
+    //Now getting the pizza orders.
     this.pizzaOrders = this.store.select(allOrders);
     this.store.dispatch(loadPizzaOrders());
   }
