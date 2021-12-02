@@ -3,8 +3,8 @@ export enum PizzaActionTypes {
     Cancel = 'Cancel',
     View = 'View',
     Pizza_Order_List = 'Pizza Order List',
-    LOAD_ORDERS='Load Pizza Orders',
-    LOAD_ORDERS_SUCCESS='Load Pizza Orders Success',
+    LOAD_ORDERS='[order page] Load Pizza Orders',
+    LOAD_ORDERS_SUCCESS='[order page] Load Pizza Order List Success',
     
     Login = 'Login',
     LOGIN_START = '[auth page] login start',

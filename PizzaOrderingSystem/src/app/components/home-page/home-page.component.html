@@ -1,3 +1,45 @@
-<p>home-page works!</p>
-<button (click)="onLogout($event)">Logout</button>
+<app-header></app-header>
 
+<div *ngIf="pizzaOrders" class="tableWidthStyle">
+    <div style="margin:10px;margin-left: 0px;">
+        <h3><b>Pizza Orders</b></h3>
+    </div>
+    <div style="margin: 5px;margin-bottom: 10px;margin-left: 0px;">
+        <button class="btn btn-primary" (click)="orderNewPizza()">
+            Order new Pizza
+        </button>
+    </div>
+    <table class="table table-hover  tableBorderStyle" *ngIf="pizzaOrders | async as ordersData">
+        <thead class="">
+            <tr>
+                <th style="text-align: center; width: 50px;">Sr.No</th>
+                <th style="width: 150px; text-align: center;">Order Number</th>
+                <th style="width: 250px;">Crust</th>
+                <th style="width: 250px;">Flavor</th>
+                <th style="width: 100px;text-align: center;">Size</th>
+                <th style="width: 150px;text-align: center;">Table Number</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of ordersData; index as i">
+                <td style="text-align: center;">{{i+1}}</td>
+                <td style="text-align: center;">{{ order.OrderId }}</td>
+                <td style="word-break: break-all">{{ order.Crust }}</td>
+                <td style="word-break: break-all">{{ order.Flavor }}</td>
+                <td style="word-break: break-all;text-align: center;">{{ order.Size }}</td>
+                <td style="text-align: center;">{{ order.TableNumber }}</td>
+
+                <td>
+                    <button class="btn btn-info" (click)="orderViewDetail(order)">
+                        View Detail</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="onOderRemove(order.OrderId)">
+                        Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

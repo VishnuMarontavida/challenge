@@ -4,22 +4,20 @@ import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
 import { Routes,RouterModule } from '@angular/router';
-import { OrderListComponent } from './pizza-order-detail/order-list/order-list.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { pizzaOrdersReducer } from '../../reducers/pizza-order.reducer';
 import { PizzaOrderEffects } from '../../effects/pizza-order.effect';
 import { EffectsModule } from '@ngrx/effects';
 
 import {PizzaActionTypes} from '../../shared/enum/pizza-action-types.enum';
-
+import {HeaderComponent} from './../../shared/header/header.component';
 
 
 const routes: Routes = [
   {
-    path: '',
-    component: OrderListComponent
+    path: ''
   },
 ];
 
@@ -27,12 +25,15 @@ const routes: Routes = [
   declarations: [
     HomePageComponent,
     // OrderListComponent
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes),
+    FormsModule,
+    // RouterModule.forChild(routes),
+    // StoreModule.forRoot({}),
     StoreModule.forFeature(PizzaActionTypes.Pizza_Order_List, pizzaOrdersReducer),
     EffectsModule.forFeature([PizzaOrderEffects]),
   ]

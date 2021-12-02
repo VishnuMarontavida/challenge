@@ -1,4 +1,4 @@
-import { setLoadingSpinner } from './../../shared/action/shared.actions';
+import { setLoadingSpinner } from './../../shared/state/shared.actions';
 import { loginStart } from '../../actions/pizza-auth.action';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';

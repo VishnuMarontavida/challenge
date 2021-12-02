@@ -1,5 +1,5 @@
 export class Pizza {
-    OrderId:string='';
+    OrderId:number=0;
     Crust:string='';
     Flavor:string='';
     Size:string='';
