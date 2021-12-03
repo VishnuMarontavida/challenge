@@ -1,4 +1,4 @@
-import { Pizza } from '../models/Pizza';
+import { Pizza, PizzaInsertData } from '../models/Pizza';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
@@ -41,7 +41,7 @@ export class OrderService {
       );
   }
 
-  addPizzaOrder(order: Pizza): Observable<Pizza> {
+  addPizzaOrder(order: PizzaInsertData): Observable<Pizza> {
 
     var token = this.getAuthToken();
     

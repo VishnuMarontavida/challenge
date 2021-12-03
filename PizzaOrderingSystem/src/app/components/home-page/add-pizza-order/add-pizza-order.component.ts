@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 export class AddPizzaOrderComponent implements OnInit {
 
   postForm: FormGroup;
+  display:string = "none";
 
   constructor(private store: Store<Pizza>) { }
 
@@ -25,6 +26,13 @@ export class AddPizzaOrderComponent implements OnInit {
         Validators.minLength(10),
       ]),
     });
+  }
+
+  openModal() {
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
   }
 
   onAddPost(){}

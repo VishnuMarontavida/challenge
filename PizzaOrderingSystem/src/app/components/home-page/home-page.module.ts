@@ -20,9 +20,9 @@ import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.compon
 const routes: Routes = [
   {
     path: '',
-    children: [
-      { path: 'add', component: AddPizzaOrderComponent }
-    ]
+    // children: [
+    //   { path: 'add', component: AddPizzaOrderComponent }
+    // ]
   },
 ];
 

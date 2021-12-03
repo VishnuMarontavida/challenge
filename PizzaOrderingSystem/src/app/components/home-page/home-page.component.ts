@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { delay, take, tap } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { allOrders } from 'src/app/selector/pizza-order.selector';
 import { setLoadingSpinner } from 'src/app/shared/state/shared.actions';
 import { PizzaActionTypes } from 'src/app/shared/enum/pizza-action-types.enum';
 import { OrderState } from 'src/app/state/pizza-order.state';
+import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +17,8 @@ import { OrderState } from 'src/app/state/pizza-order.state';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+
+  @ViewChild(AddPizzaOrderComponent) addOrderModal: AddPizzaOrderComponent;
 
   constructor(private store: Store<OrderState>) { }
 
@@ -28,20 +31,20 @@ export class HomePageComponent implements OnInit {
   }
 
   //Used to Remove the Pizza Order data from the server side.
-  onOderRemove(orderId:number){
+  onOderRemove(orderId: number) {
     if (confirm('Are you sure you want to remove the order')) {
       // this.store.dispatch(deleteOrder({ id }));
     }
   }
 
   //Used to View the Pizza Order data based on the selected Order.
-  orderViewDetail(order:Pizza){
+  orderViewDetail(order: Pizza) {
 
   }
 
   //Used to order new pizza.
-  orderNewPizza(){
-
+  orderNewPizza() {
+    this.addOrderModal.openModal();
   }
 
 }
