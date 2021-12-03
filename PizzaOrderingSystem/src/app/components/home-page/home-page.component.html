@@ -1,3 +1,45 @@
-<p>home-page works!</p>
-<button (click)="onLogout($event)">Logout</button>
+<app-header></app-header>
 
+<div *ngIf="pizzaOrders" class="tableWidthStyle m-auto">
+    <div class="m-2 ms-0">
+        <h3><b>Pizza Orders</b></h3>
+    </div>
+    <div class="m-1 mb-2 ms-0">
+        <button class="btn btn-primary" (click)="orderNewPizza()">
+            Order new Pizza
+        </button>
+    </div>
+    <table class="table table-hover  border border-dark" *ngIf="pizzaOrders | async as ordersData">
+        <thead class="">
+            <tr>
+                <th class="text-center width50">Sr.No</th>
+                <th class="text-center width150">Order Number</th>
+                <th class="width250">Crust</th>
+                <th class="width250">Flavor</th>
+                <th class="width100 text-center">Size</th>
+                <th class="text-center width150">Table Number</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of ordersData; index as i">
+                <td class="text-center">{{i+1}}</td>
+                <td class="text-center">{{ order.OrderId }}</td>
+                <td class="text-break">{{ order.Crust }}</td>
+                <td class="text-break">{{ order.Flavor }}</td>
+                <td class="text-break text-center">{{ order.Size }}</td>
+                <td class="text-center">{{ order.TableNumber }}</td>
+
+                <td>
+                    <button class="btn btn-info" (click)="orderViewDetail(order)">
+                        View Detail</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="onOderRemove(order.OrderId)">
+                        Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

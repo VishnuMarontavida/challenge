@@ -1,7 +1,7 @@
 import {
   setLoadingSpinner,
   setErrorMessage,
-} from '../shared/action/shared.actions';
+} from '../shared/state/shared.actions';
 
 import { AuthService } from '../services/auth.service';
 import { OrderService } from '../services/order.service';

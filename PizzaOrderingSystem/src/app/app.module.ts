@@ -11,12 +11,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthEffects } from './effects/pizza-auth.effects';
 import { AuthReducer } from './reducers/pizza-auth.reducer';
 import { StoreModule } from '@ngrx/store';
-import { OrderListComponent } from './components/home-page/pizza-order-detail/order-list/order-list.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+// import {HeaderComponent} from './shared/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrderListComponent
+    // HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +28,9 @@ import { OrderListComponent } from './components/home-page/pizza-order-detail/or
     FormsModule,
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(AuthReducer),
+    StoreRouterConnectingModule.forRoot({
+      // serializer: CustomSerializer,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
