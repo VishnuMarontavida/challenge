@@ -32,7 +32,7 @@ export class OrderService {
               Crust: data[key].Crust,
               Flavor: data[key].Flavor,
               Size: data[key].Size,
-              TableNumber: tableNumber
+              Table_No: tableNumber
             }
             orders.push(order);
           }
@@ -42,9 +42,7 @@ export class OrderService {
   }
 
   addPizzaOrder(order: PizzaInsertData): Observable<Pizza> {
-
     var token = this.getAuthToken();
-    
     const httpOptions = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     };
@@ -52,9 +50,25 @@ export class OrderService {
     return this.http.post<Pizza>(pizzaAPIs.orderGetAndPost, order, httpOptions);
   }
 
+  removePizzaOrder(order: Pizza): Observable<string> {
+
+    const apiURL: string = pizzaAPIs.orderGetAndPost + '/' + order.OrderId;
+    
+    return this.http
+      .delete<any>(apiURL)
+      .pipe(
+        map((deletedStatus: any) => {
+          return deletedStatus;
+        })
+      );
+  }
+
   getAuthToken() {
     var loggedinUserData: any = localStorage.getItem('userData');
-    if (loggedinUserData)
-      return loggedinUserData.access_token;
+    if (loggedinUserData) {
+      var userData = JSON.parse(loggedinUserData);
+      if (userData)
+        return userData.access_token;
+    }
   }
 }

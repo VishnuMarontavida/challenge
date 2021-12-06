@@ -14,7 +14,9 @@ import { EffectsModule } from '@ngrx/effects';
 import {PizzaActionTypes} from '../../shared/enum/pizza-action-types.enum';
 import {HeaderComponent} from './../../shared/header/header.component';
 
-import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component'
+import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
+import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.component';
+import { ShowMessageComponent } from './../show-message/show-message.component';
 
 
 const routes: Routes = [
@@ -29,9 +31,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomePageComponent,
-    // OrderListComponent
     HeaderComponent,
-    AddPizzaOrderComponent
+    AddPizzaOrderComponent,
+    ViewPizzaOrderComponent,
+    ShowMessageComponent
   ],
   imports: [
     CommonModule,

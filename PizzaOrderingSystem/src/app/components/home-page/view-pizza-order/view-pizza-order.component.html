@@ -3,12 +3,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content border border-dark">
       <div class="modal-header">
-        <h4 class="modal-title">Add Pizza Order</h4>
-        <span aria-hidden="true" (click)="onCloseHandled()" class="cursor-pointer lg">&times;</span>
+        <h4 class="modal-title">View Pizza Order</h4>
+        <span aria-hidden="true" (click)="onCloseViewDetailModal()" class="cursor-pointer lg">&times;</span>
       </div>
       <div class="modal-body">
-        <div class="mandatoryLabelStyle">All fields are mandatory</div>
-
+       
         <div class="container">
           <div class="row p-2">
             <div class="col-4 text-end">
@@ -16,7 +15,7 @@
             </div>
             <div class="col-8">
              
-              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Crust">
+              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Crust" disabled>
                 <option *ngFor="let crust of crustList" [ngValue]="crust.value">
                   {{ crust.text }}
                 </option>
@@ -28,7 +27,7 @@
               <b>Flavor :</b>
             </div>
             <div class="col-8">
-              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Flavor">
+              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Flavor" disabled>
                 <option *ngFor="let flavor of flavorList" [ngValue]="flavor.value">
                   {{ flavor.text }}
                 </option>
@@ -40,7 +39,7 @@
               <b>Size :</b>
             </div>
             <div class="col-8">
-              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Size">
+              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Size" disabled>
                 <option *ngFor="let size of sizeList" [ngValue]="size.value">
                   {{ size.text }}
                 </option>
@@ -52,15 +51,14 @@
               <b>Table No. :</b>
             </div>
             <div class="col-8">
-              <input type="text" class="form-control" [(ngModel)]="pizzaOrder.Table_No" maxlength="1" (keypress)="isNumber($event)"/>
+              <input type="text" class="form-control" [(ngModel)]="pizzaOrder.Table_No" maxlength="1" disabled />
             </div>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="addPizzaOrder()">Submit</button>
-        <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="onCloseViewDetailModal()">Close</button>
       </div>
     </div>
   </div>

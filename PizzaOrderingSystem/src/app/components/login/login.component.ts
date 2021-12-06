@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PizzaAuthResponse } from '../../models/PizzaAuthResponse';
 import { LoginData } from 'src/app/models/LoginData';
+import { Observable } from 'rxjs';
+import { getMessage, getSuccessMessageStatus } from 'src/app/selector/auth.selector';
+import { removeMessage } from 'src/app/actions/pizza-order.action';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private store: Store<PizzaAuthResponse>) { }
 
-  ngOnInit(): void { }
+  message: Observable<string>;
+  SuccessMessageStatus: Observable<boolean>
+
+  ngOnInit(): void {
+
+    //Getting the message stored on the state.
+    this.message = this.store.select(getMessage);
+    this.SuccessMessageStatus = this.store.select(getSuccessMessageStatus);
+
+  }
 
   //Function called on submit button click.
   onLoginSubmit(userName: string, password: string) {
@@ -23,7 +35,7 @@ export class LoginComponent implements OnInit {
         username: userName,
         password: password
       }
-      this.store.dispatch(loginStart({userData}));
+      this.store.dispatch(loginStart({ userData }));
       //Todo : Now Iam not showing the error message in UI.Need to show that.
     }
   }
@@ -42,4 +54,9 @@ export class LoginComponent implements OnInit {
     }
     return true;
   }
+
+  onCloseHandled(){
+    this.store.dispatch(removeMessage());
+  }
+
 }
