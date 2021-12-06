@@ -4,6 +4,7 @@ import { Pizza, PizzaInsertData } from 'src/app/models/Pizza';
 import { Store } from '@ngrx/store';
 import { addOrder } from 'src/app/actions/pizza-order.action';
 import { Observable } from 'rxjs';
+import { DropdownData } from 'src/app/models/DropdownData';
 
 @Component({
   selector: 'app-add-pizza-order',
@@ -13,9 +14,9 @@ import { Observable } from 'rxjs';
 export class AddPizzaOrderComponent implements OnInit {
 
   display: string = "none";
-  flavorList: any = [];
-  sizeList: any = [];
-  crustList: any = [];
+  flavorList: DropdownData[] = [];
+  sizeList: DropdownData[] = [];
+  crustList: DropdownData[] = [];
 
   constructor(private store: Store<Pizza>) { }
 
