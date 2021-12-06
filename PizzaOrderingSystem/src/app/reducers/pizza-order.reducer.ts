@@ -14,7 +14,6 @@ const _orderReducer = createReducer(initialState,
 	on(loadPizzaOrdersSuccess, (state, action) => {
 		// ...state,
 		// OrderList: action.OrderList
-
 		return {
 			...state,
 			OrderList: action.OrderList,
