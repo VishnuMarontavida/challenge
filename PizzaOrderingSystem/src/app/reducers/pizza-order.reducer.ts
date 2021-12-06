@@ -14,12 +14,18 @@ const _orderReducer = createReducer(initialState,
 	on(loadPizzaOrdersSuccess, (state, action) => {
 		// ...state,
 		// OrderList: action.OrderList
+
 		return {
 			...state,
 			OrderList: action.OrderList,
-			SuccessMessageStatus: false,
+			// SuccessMessageStatus: false,
+			ErrorMessageStatus: false,
 			LoadingStatus: false,
-			Message: '',
+			MessageData:{
+				SuccessMessageStatus:false,
+				Message:''
+			}
+			// Message: '',
 		};
 	}
 	),
@@ -27,9 +33,14 @@ const _orderReducer = createReducer(initialState,
 		return {
 			...state,
 			OrderList: state.OrderList.slice().concat(action.order),
-			SuccessMessageStatus: false,
+			// SuccessMessageStatus: true,
+			ErrorMessageStatus: false,
 			LoadingStatus: false,
-			Message: 'Order created Successfully.',
+			MessageData:{
+				SuccessMessageStatus: true,
+				Message: 'Order created Successfully.'
+			}
+			// Message: 'Order created Successfully.',
 		};
 	}),
 	on(addOrderFailed, (state, action) => {
@@ -37,8 +48,13 @@ const _orderReducer = createReducer(initialState,
 		return {
 			...state,
 			orderData: [...state.OrderList, action.message],
-			SuccessMessageStatus: false,
-			Message: action.message,
+			// SuccessMessageStatus: false,
+			ErrorMessageStatus: true,
+			// Message: action.message,
+			MessageData:{
+				SuccessMessageStatus: false,
+				Message: action.message
+			},
 			LoadingStatus: false,
 			OrderList: state.OrderList
 		};
@@ -55,9 +71,14 @@ const _orderReducer = createReducer(initialState,
 		return {
 			...state,
 			OrderList: newOrderList,
-			SuccessMessageStatus: false,
+			// SuccessMessageStatus: true,
+			ErrorMessageStatus: false,
 			LoadingStatus: false,
-			Message: 'Order removed Successfully.',
+			// Message: 'Order removed Successfully.',
+			MessageData:{
+				Message:'Order removed Successfully.',
+				SuccessMessageStatus : true
+			}
 		};
 	}),
 	on(removeOrderFailed, (state, action) => {
@@ -65,8 +86,13 @@ const _orderReducer = createReducer(initialState,
 		return {
 			...state,
 			orderData: [...state.OrderList, action.message],
-			SuccessMessageStatus: false,
-			Message: action.message,
+			// SuccessMessageStatus: false,
+			ErrorMessageStatus: true,
+			// Message: action.message,
+			MessageData:{
+				SuccessMessageStatus: false,
+				Message: action.message
+			},
 			LoadingStatus: false,
 			OrderList: state.OrderList
 		};
@@ -77,8 +103,13 @@ const _orderReducer = createReducer(initialState,
 		return {
 			...state,
 			orderData: [...state.OrderList],
-			SuccessMessageStatus: false,
-			Message: '',
+			// SuccessMessageStatus: false,
+			ErrorMessageStatus: false,
+			// Message: '',
+			MessageData:{
+				SuccessMessageStatus: false,
+				Message: ''
+			},
 			LoadingStatus: false,
 			OrderList: state.OrderList
 		};

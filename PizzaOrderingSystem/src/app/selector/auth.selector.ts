@@ -15,3 +15,4 @@ const getAuthState = createFeatureSelector<AuthState>(PizzaActionTypes.Login);
 
 export const getMessage = createSelector(getAuthState, (state) => state.Message);
 export const getSuccessMessageStatus = createSelector(getAuthState, (state) => state.SuccessMessageStatus);
+export const getErrorMessageStatus = createSelector(getAuthState, (state) => state.ErrorMessageStatus);

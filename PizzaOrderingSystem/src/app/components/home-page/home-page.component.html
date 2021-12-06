@@ -2,19 +2,24 @@
 
 <div *ngIf="pizzaOrders" class="tableWidthStyle m-auto">
 
+    <!-- Used to show bot success and error message.-->
+    <div *ngIf="messageData | async as actionMessage;">
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert"
+            *ngIf="actionMessage.SuccessMessageStatus==true && actionMessage.Message!=''; else errorMessage">
+            {{ actionMessage.Message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()"
+                aria-label="Close"></button>
+        </div>
 
-    <!-- <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="SuccessMessageStatus && message | async as actionMessage">
-        {{ message | async }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseHandled()" aria-label="Close"></button>
-    </div> -->
-
-    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert" *ngIf="SuccessMessageStatus && message | async as actionMessage">
-        {{ message | async }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()" aria-label="Close"></button>
+        <ng-template #errorMessage>
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert"
+                *ngIf="actionMessage.Message!=''">
+                {{ actionMessage.Message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()"
+                    aria-label="Close"></button>
+            </div>
+        </ng-template>
     </div>
-
-
-
 
     <div class="m-2 ms-0">
         <h3><b>Pizza Orders</b></h3>

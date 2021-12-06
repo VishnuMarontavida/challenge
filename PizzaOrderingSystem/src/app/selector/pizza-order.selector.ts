@@ -9,5 +9,7 @@ const getOrdersState = createFeatureSelector<OrderState>(ORDER_STATE_NAME);
 
 export const allOrders = createSelector(getOrdersState, (state) => { return state.OrderList ? state.OrderList : []; });
 
-export const getMessage = createSelector(getOrdersState, (state) => state.Message);
-export const getSuccessMessageStatus = createSelector(getOrdersState, (state) => state.SuccessMessageStatus);
+// export const getMessage = createSelector(getOrdersState, (state) => state.Message);
+// export const getSuccessMessageStatus = createSelector(getOrdersState, (state) => state.SuccessMessageStatus);
+
+export const getMessageData = createSelector(getOrdersState, (state) => state.MessageData);
