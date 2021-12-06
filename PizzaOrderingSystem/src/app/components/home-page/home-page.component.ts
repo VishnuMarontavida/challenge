@@ -56,6 +56,8 @@ export class HomePageComponent implements OnInit {
   onOderRemove(order: Pizza) {
     if (confirm('Are you sure, you want to remove the order?')) {
       this.store.dispatch(removeOrder({ order }));
+
+      window.scrollTo(0, 0);
     }
   }
 
@@ -67,6 +69,7 @@ export class HomePageComponent implements OnInit {
   //Used to order new pizza.
   orderNewPizza() {
     this.addOrderModal.openModal();
+    window.scrollTo(0, 0);
   }
 
   //Closing the message and removing the message label

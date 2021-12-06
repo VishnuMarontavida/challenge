@@ -1,5 +1,10 @@
 .tableWidthStyle{
-    width: 80%;
+    width: 82%;
+    // background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    background-color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 3px;
 }
 
 .width50{
@@ -19,4 +24,10 @@
 }
 .height100{
     height: 100px;
+}
+.backgroundColor{
+    background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 57px;
 }

@@ -1,73 +1,75 @@
 <app-header></app-header>
 
-<div *ngIf="pizzaOrders" class="tableWidthStyle m-auto">
+<div class="backgroundColor">
+    <div *ngIf="pizzaOrders" class="tableWidthStyle m-auto">
 
-    <!-- Used to show bot success and error message.-->
-    <div *ngIf="messageData | async as actionMessage;">
-        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert"
-            *ngIf="actionMessage.SuccessMessageStatus==true && actionMessage.Message!=''; else errorMessage">
-            {{ actionMessage.Message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()"
-                aria-label="Close"></button>
+        <div class="m-2 ms-0 p-2 pt-3">
+            <h3><b>Pizza Orders</b></h3>
         </div>
 
-        <ng-template #errorMessage>
-            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert"
-                *ngIf="actionMessage.Message!=''">
+        <!-- Used to show bot success and error message.-->
+        <div *ngIf="messageData | async as actionMessage;">
+            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert"
+                *ngIf="actionMessage.SuccessMessageStatus==true && actionMessage.Message!=''; else errorMessage">
                 {{ actionMessage.Message }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()"
                     aria-label="Close"></button>
             </div>
-        </ng-template>
-    </div>
 
-    <div class="m-2 ms-0">
-        <h3><b>Pizza Orders</b></h3>
-    </div>
+            <ng-template #errorMessage>
+                <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert"
+                    *ngIf="actionMessage.Message!=''">
+                    {{ actionMessage.Message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()"
+                        aria-label="Close"></button>
+                </div>
+            </ng-template>
+        </div>
 
-    <div class="m-1 mb-2 ms-0">
-        <button class="btn btn-primary" (click)="orderNewPizza()">
-            Order new Pizza
-        </button>
-    </div>
-    <table class="table table-hover  border border-dark" *ngIf="pizzaOrders | async as ordersData">
-        <thead class="">
-            <tr>
-                <th class="text-center width50">Sr.No</th>
-                <th class="text-center width150">Order Number</th>
-                <th class="width200">Crust</th>
-                <th class="width150">Flavor</th>
-                <th class="width150">Image</th>
-                <th class="width100 text-center">Size</th>
-                <th class="text-center width150">Table Number</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let order of ordersData; index as i">
-                <td class="text-center">{{i+1}}</td>
-                <td class="text-center">{{ order.OrderId }}</td>
-                <td class="text-break">{{ order.Crust }}</td>
-                <td class="text-break">{{ order.Flavor }}</td>
-                <td class="text-break">
-                    <!-- {{ order.Image }} -->
-                    <img src="{{ order.Image }}" class="height100">
-                </td>
-                <td class="text-break text-center">{{ order.Size }}</td>
-                <td class="text-center">{{ order.Table_No }}</td>
+        <div class="m-1 mb-2 ms-0">
+            <button class="btn btn-primary" (click)="orderNewPizza()">
+                Order new Pizza
+            </button>
+        </div>
+        <table class="table table-hover  border border-dark" *ngIf="pizzaOrders | async as ordersData">
+            <thead class="">
+                <tr>
+                    <th class="text-center width50">Sr.No</th>
+                    <th class="text-center width150">Order Number</th>
+                    <th class="width200">Crust</th>
+                    <th class="width150">Flavor</th>
+                    <th class="width150">Image</th>
+                    <th class="width100 text-center">Size</th>
+                    <th class="text-center width150">Table Number</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of ordersData; index as i">
+                    <td class="text-center">{{i+1}}</td>
+                    <td class="text-center">{{ order.OrderId }}</td>
+                    <td class="text-break">{{ order.Crust }}</td>
+                    <td class="text-break">{{ order.Flavor }}</td>
+                    <td class="text-break">
+                        <!-- {{ order.Image }} -->
+                        <img src="{{ order.Image }}" class="height100">
+                    </td>
+                    <td class="text-break text-center">{{ order.Size }}</td>
+                    <td class="text-center">{{ order.Table_No }}</td>
 
-                <td>
-                    <button class="btn btn-info" (click)="orderViewDetail(order)">
-                        View Detail</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" (click)="onOderRemove(order)">
-                        Remove</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <td>
+                        <button class="btn btn-info" (click)="orderViewDetail(order)">
+                            View Detail</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="onOderRemove(order)">
+                            Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <app-add-pizza-order></app-add-pizza-order>

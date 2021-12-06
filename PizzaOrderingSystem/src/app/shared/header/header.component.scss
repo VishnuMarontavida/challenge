@@ -1,6 +1,7 @@
 .headerStyle{
     width: 100%;
-    background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    // background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    background-color: #3c3670;
     min-height: 50px;
 }
 .logoutButtonStyle{
@@ -11,4 +12,8 @@
 .cursor-pointer{
     cursor: pointer;
     color:#fff
+}
+
+.fixed-content {
+    position:fixed;
 }
