@@ -13,12 +13,12 @@ import { AuthReducer } from './reducers/pizza-auth.reducer';
 import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { PizzaActionTypes } from './shared/enum/pizza-action-types.enum';
-// import {HeaderComponent} from './shared/header/header.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    // HeaderComponent
+    // LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

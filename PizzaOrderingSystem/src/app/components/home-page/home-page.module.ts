@@ -17,7 +17,7 @@ import {HeaderComponent} from './../../shared/header/header.component';
 import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
 import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.component';
 import { ShowMessageComponent } from './../show-message/show-message.component';
-
+import { LoadingSpinnerComponent } from 'src/app/shared/loading-spinner/loading-spinner.component';
 
 const routes: Routes = [
   {
@@ -34,7 +34,8 @@ const routes: Routes = [
     HeaderComponent,
     AddPizzaOrderComponent,
     ViewPizzaOrderComponent,
-    ShowMessageComponent
+    ShowMessageComponent,
+    // LoadingSpinnerComponent
   ],
   imports: [
     CommonModule,

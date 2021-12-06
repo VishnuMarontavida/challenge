@@ -15,6 +15,7 @@ import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Pizza } from '../models/Pizza';
 import { LoginData } from '../models/LoginData';
+import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 
 @Injectable()
 export class AuthEffects {
@@ -23,7 +24,8 @@ export class AuthEffects {
     private authService: AuthService,
     private orderService: OrderService,
     private store: Store<Pizza>,
-    private router: Router
+    private router: Router,
+    private communication: CommunicationService
   ) { }
 
   //This will trigger for login operation.
@@ -31,14 +33,22 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(loginStart),
       exhaustMap((action: any) => {
-       
+
         return this.authService.login(action.userData).pipe(
           map((data) => {
+            //Hide the loading animation.
+            this.communication.loadSpinnerAnimation(false);
+
             const user = this.authService.formatUser(data);
             this.authService.setUserInLocalStorage(user);
             return loginSuccess({ user, redirect: true });
           }),
           catchError((errResp) => {
+            //Hide the loading animation.
+            this.communication.loadSpinnerAnimation(false);
+
+            this.communication.callLoginErrorMethod('Incorrect username or password');
+
             const errorMessage = this.authService.getErrorMessage(
               // errResp.error.error.message
               'INVALID_PASSWORD'
@@ -72,7 +82,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(autoLogout),
         map((action) => {
-          
+
           this.authService.logout();
           this.router.navigate(['login']);
         })

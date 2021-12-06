@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadingSpinnerComponent implements OnInit {
 
+  showLoadingStatus: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showLoadingAnimation() {
+    this.showLoadingStatus = true;
+  }
+
+  hideLoadingAnimation() {
+    this.showLoadingStatus = false;
   }
 
 }

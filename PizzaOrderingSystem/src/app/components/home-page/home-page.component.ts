@@ -12,8 +12,9 @@ import { OrderState } from 'src/app/state/pizza-order.state';
 import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
 import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.component';
 import { ShowMessageComponent } from './../show-message/show-message.component';
-import { getErrorMessageStatus } from 'src/app/selector/auth.selector';
+import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 import { MessageData } from 'src/app/models/MessagingData';
+import { LoadingSpinnerComponent } from 'src/app/shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-home-page',
@@ -24,9 +25,12 @@ export class HomePageComponent implements OnInit {
 
   @ViewChild(AddPizzaOrderComponent) addOrderModal: AddPizzaOrderComponent;
   @ViewChild(ViewPizzaOrderComponent) viewOrderModal: ViewPizzaOrderComponent;
-  // @ViewChild(ViewPizzaOrderComponent) showMessageModal: ShowMessageComponent;
+  @ViewChild(LoadingSpinnerComponent) loadSpinnerEvent: LoadingSpinnerComponent;
 
-  constructor(private store: Store<OrderState>) { }
+  constructor(
+    private store: Store<OrderState>,
+    private communication: CommunicationService
+  ) { }
 
   pizzaOrders: Observable<Pizza[]>;
   count: Observable<number>;
@@ -37,12 +41,35 @@ export class HomePageComponent implements OnInit {
 
   messageData: Observable<MessageData>;
 
+  successDisplay: string = 'none';
+  errorDisplay: string = 'none';
+  returnMessage: string;
+
   ngOnInit(): void {
     //Now getting the pizza orders.
     this.loadOrderList();
+
+    this.communication.homeMethodCalled$.subscribe((returnObj: any) => {
+      if (returnObj) {
+        this.returnMessage = returnObj.message;
+        if (returnObj.success) this.successDisplay = 'block';
+        else this.errorDisplay = 'block'; setTimeout(() => {
+          this.errorDisplay = 'none';
+          this.successDisplay = 'none';
+        }, 4000);
+      }
+    });
+
+    this.communication.spinnerAnimationCalled$.subscribe((status: boolean) => {
+      if (!status)
+        this.loadSpinnerEvent.hideLoadingAnimation();
+      else
+        this.loadSpinnerEvent.showLoadingAnimation();
+    });
   }
 
   loadOrderList() {
+    this.loadSpinnerEvent.showLoadingAnimation();
     this.pizzaOrders = this.store.select(allOrders);
     this.store.dispatch(loadPizzaOrders());
 

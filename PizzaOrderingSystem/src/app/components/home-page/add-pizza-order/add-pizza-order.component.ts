@@ -34,7 +34,9 @@ export class AddPizzaOrderComponent implements OnInit {
     Table_No: 0
   };
 
-  insertedData: Observable<Pizza[]>;
+  successDisplay: string = 'none';
+  errorDisplay: string = 'none';
+  returnMessage: string;
 
   ngOnInit(): void {
     //Load the initial data for the Add order page.
@@ -113,8 +115,16 @@ export class AddPizzaOrderComponent implements OnInit {
   validateOrder() {
     if (this.pizzaOrder.Table_No == 0) {
 
-      //Now need to show the error message.
-      alert('Enter table number.')
+      //Used to show the error message.
+      this.errorDisplay = 'block';
+      this.returnMessage = 'Enter table number';
+      setTimeout(() => {
+        this.errorDisplay = 'none';
+      }, 4000);
+
+
+      
+      // alert('Enter table number.')
 
       return false;
     }

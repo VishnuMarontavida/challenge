@@ -8,7 +8,7 @@
         </div>
 
         <!-- Used to show bot success and error message.-->
-        <div *ngIf="messageData | async as actionMessage;">
+        <!-- <div *ngIf="messageData | async as actionMessage;">
             <div class="alert alert-success alert-dismissible fade show mt-2" role="alert"
                 *ngIf="actionMessage.SuccessMessageStatus==true && actionMessage.Message!=''; else errorMessage">
                 {{ actionMessage.Message }}
@@ -24,6 +24,13 @@
                         aria-label="Close"></button>
                 </div>
             </ng-template>
+        </div> -->
+
+        <div class="col-sm">
+            <div class="alert alert-success text-center" role="alert" [ngStyle]="{ display: successDisplay }"> {{
+                returnMessage }} </div>
+            <div class="alert alert-danger text-center" role="alert" [ngStyle]="{ display: errorDisplay }"> {{
+                returnMessage }} </div>
         </div>
 
         <div class="m-1 mb-2 ms-0">
@@ -74,4 +81,4 @@
 
 <app-add-pizza-order></app-add-pizza-order>
 <app-view-pizza-order></app-view-pizza-order>
-<!-- <app-show-message></app-show-message> -->
+<!-- <app-loading-spinner></app-loading-spinner> -->
