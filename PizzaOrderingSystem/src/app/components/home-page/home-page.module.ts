@@ -14,25 +14,34 @@ import { EffectsModule } from '@ngrx/effects';
 import {PizzaActionTypes} from '../../shared/enum/pizza-action-types.enum';
 import {HeaderComponent} from './../../shared/header/header.component';
 
+import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
+import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.component';
+import { ShowMessageComponent } from './../show-message/show-message.component';
+
 
 const routes: Routes = [
   {
-    path: ''
+    path: '',
+    // children: [
+    //   { path: 'add', component: AddPizzaOrderComponent }
+    // ]
   },
 ];
 
 @NgModule({
   declarations: [
     HomePageComponent,
-    // OrderListComponent
-    HeaderComponent
+    HeaderComponent,
+    AddPizzaOrderComponent,
+    ViewPizzaOrderComponent,
+    ShowMessageComponent
   ],
   imports: [
     CommonModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    // RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
     // StoreModule.forRoot({}),
     StoreModule.forFeature(PizzaActionTypes.Pizza_Order_List, pizzaOrdersReducer),
     EffectsModule.forFeature([PizzaOrderEffects]),

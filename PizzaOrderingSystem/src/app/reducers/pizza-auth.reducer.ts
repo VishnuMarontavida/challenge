@@ -1,36 +1,31 @@
 import { autoLogout, loginFail, loginSuccess } from '../actions/pizza-auth.action';
 import { createReducer, on } from '@ngrx/store';
-import { PizzaAuthResponse } from '../models/PizzaAuthResponse';
-// import { initialState } from './auth.state';
-
-export interface AuthState {
-    authenticateData: PizzaAuthResponse | null;
-}
-
-export const initialState: AuthState = {
-    authenticateData: null,
-};
+import { initialState } from '../state/pizza-auth.state';
 
 const appReducer = createReducer(
     initialState,
     on(loginSuccess, (state, action) => {
         return {
             ...state,
+            Message: '',
+            SuccessMessageStatus: false,
             user: action.user,
         };
     }),
     on(loginFail, (state, action) => {
         return {
             ...state,
+            Message: action.message,
+            SuccessMessageStatus: false,
             user: action,
         };
     }),
     on(autoLogout, (state) => {
         return {
-          ...state,
-          user: null,
+            ...state,
+            user: null,
         };
-      })
+    })
 );
 
 export function AuthReducer(state: any, action: any) {

@@ -1,9 +1,25 @@
 <app-header></app-header>
 
 <div *ngIf="pizzaOrders" class="tableWidthStyle m-auto">
+
+
+    <!-- <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="SuccessMessageStatus && message | async as actionMessage">
+        {{ message | async }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseHandled()" aria-label="Close"></button>
+    </div> -->
+
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert" *ngIf="SuccessMessageStatus && message | async as actionMessage">
+        {{ message | async }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()" aria-label="Close"></button>
+    </div>
+
+
+
+
     <div class="m-2 ms-0">
         <h3><b>Pizza Orders</b></h3>
     </div>
+
     <div class="m-1 mb-2 ms-0">
         <button class="btn btn-primary" (click)="orderNewPizza()">
             Order new Pizza
@@ -29,17 +45,21 @@
                 <td class="text-break">{{ order.Crust }}</td>
                 <td class="text-break">{{ order.Flavor }}</td>
                 <td class="text-break text-center">{{ order.Size }}</td>
-                <td class="text-center">{{ order.TableNumber }}</td>
+                <td class="text-center">{{ order.Table_No }}</td>
 
                 <td>
                     <button class="btn btn-info" (click)="orderViewDetail(order)">
                         View Detail</button>
                 </td>
                 <td>
-                    <button class="btn btn-danger" (click)="onOderRemove(order.OrderId)">
+                    <button class="btn btn-danger" (click)="onOderRemove(order)">
                         Remove</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<app-add-pizza-order></app-add-pizza-order>
+<app-view-pizza-order></app-view-pizza-order>
+<!-- <app-show-message></app-show-message> -->

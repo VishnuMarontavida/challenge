@@ -1,9 +1,10 @@
-import { Pizza } from '../models/Pizza';
+import { Pizza, PizzaInsertData } from '../models/Pizza';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { pizzaAPIs } from '../env-config';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class OrderService {
   //Used to get all Pizza Orders from the API.
   getOrders(): Observable<Pizza[]> {
     return this.http
-      .get<Pizza[]>(`api/orders`)
+      .get<Pizza[]>(pizzaAPIs.orderGetAndPost)
       .pipe(
         map((data: any) => {
           const orders: Pizza[] = [];
@@ -31,7 +32,7 @@ export class OrderService {
               Crust: data[key].Crust,
               Flavor: data[key].Flavor,
               Size: data[key].Size,
-              TableNumber: tableNumber
+              Table_No: tableNumber
             }
             orders.push(order);
           }
@@ -40,5 +41,34 @@ export class OrderService {
       );
   }
 
+  addPizzaOrder(order: PizzaInsertData): Observable<Pizza> {
+    var token = this.getAuthToken();
+    const httpOptions = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    };
 
+    return this.http.post<Pizza>(pizzaAPIs.orderGetAndPost, order, httpOptions);
+  }
+
+  removePizzaOrder(order: Pizza): Observable<string> {
+
+    const apiURL: string = pizzaAPIs.orderGetAndPost + '/' + order.OrderId;
+    
+    return this.http
+      .delete<any>(apiURL)
+      .pipe(
+        map((deletedStatus: any) => {
+          return deletedStatus;
+        })
+      );
+  }
+
+  getAuthToken() {
+    var loggedinUserData: any = localStorage.getItem('userData');
+    if (loggedinUserData) {
+      var userData = JSON.parse(loggedinUserData);
+      if (userData)
+        return userData.access_token;
+    }
+  }
 }

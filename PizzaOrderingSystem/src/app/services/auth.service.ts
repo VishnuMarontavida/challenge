@@ -40,6 +40,7 @@ export class AuthService {
     }
 
     setUserInLocalStorage(user: PizzaAuthResponse) {
+        localStorage.removeItem('userData');
         localStorage.setItem('userData', JSON.stringify(user));
     }
 

@@ -1,0 +1,67 @@
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border border-dark">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Pizza Order</h4>
+        <span aria-hidden="true" (click)="onCloseHandled()" class="cursor-pointer lg">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="mandatoryLabelStyle">All fields are mandatory</div>
+
+        <div class="container">
+          <div class="row p-2">
+            <div class="col-4 text-end">
+              <b>Crust :</b>
+            </div>
+            <div class="col-8">
+             
+              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Crust">
+                <option *ngFor="let crust of crustList" [ngValue]="crust.value">
+                  {{ crust.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col-4 text-end">
+              <b>Flavor :</b>
+            </div>
+            <div class="col-8">
+              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Flavor">
+                <option *ngFor="let flavor of flavorList" [ngValue]="flavor.value">
+                  {{ flavor.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col-4 text-end">
+              <b>Size :</b>
+            </div>
+            <div class="col-8">
+              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Size">
+                <option *ngFor="let size of sizeList" [ngValue]="size.value">
+                  {{ size.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col-4 text-end">
+              <b>Table No. :</b>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" [(ngModel)]="pizzaOrder.Table_No" maxlength="1" (keypress)="isNumber($event)"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="addPizzaOrder()">Submit</button>
+        <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
