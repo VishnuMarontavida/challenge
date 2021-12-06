@@ -20,7 +20,8 @@ export class ViewPizzaOrderComponent implements OnInit {
     Flavor: '',
     Size: '',
     Table_No: 0,
-    OrderId: 0
+    OrderId: 0,
+    Image:''
   }
 
   ngOnInit() {
@@ -77,7 +78,8 @@ export class ViewPizzaOrderComponent implements OnInit {
       Flavor: orderData.Flavor,
       Size: orderData.Size,
       Table_No: orderData.Table_No,
-      OrderId: orderData.OrderId
+      OrderId: orderData.OrderId,
+      Image:orderData.Image
     }
   }
 

@@ -66,7 +66,7 @@ export class PizzaOrderEffects {
       mergeMap((action) => {
         return this.orderService.addPizzaOrder(action.order).pipe(
           map((data: any) => {
-            const order: Pizza = { ...action.order, OrderId: data.Order_ID };
+            const order: Pizza = { ...action.order, OrderId: data.Order_ID,Image: data.Image };
             //returning the status and value after inserting the Order
             return  addOrderSuccess({ order });
           }),

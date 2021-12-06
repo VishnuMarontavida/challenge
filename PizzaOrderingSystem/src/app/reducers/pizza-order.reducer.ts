@@ -30,6 +30,7 @@ const _orderReducer = createReducer(initialState,
 	}
 	),
 	on(addOrderSuccess, (state, action) => {
+
 		return {
 			...state,
 			OrderList: state.OrderList.slice().concat(action.order),

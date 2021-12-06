@@ -35,8 +35,9 @@
             <tr>
                 <th class="text-center width50">Sr.No</th>
                 <th class="text-center width150">Order Number</th>
-                <th class="width250">Crust</th>
-                <th class="width250">Flavor</th>
+                <th class="width200">Crust</th>
+                <th class="width150">Flavor</th>
+                <th class="width150">Image</th>
                 <th class="width100 text-center">Size</th>
                 <th class="text-center width150">Table Number</th>
                 <th></th>
@@ -49,6 +50,10 @@
                 <td class="text-center">{{ order.OrderId }}</td>
                 <td class="text-break">{{ order.Crust }}</td>
                 <td class="text-break">{{ order.Flavor }}</td>
+                <td class="text-break">
+                    <!-- {{ order.Image }} -->
+                    <img src="{{ order.Image }}" class="height100">
+                </td>
                 <td class="text-break text-center">{{ order.Size }}</td>
                 <td class="text-center">{{ order.Table_No }}</td>
 
