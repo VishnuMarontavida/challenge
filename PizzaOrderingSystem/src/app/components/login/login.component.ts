@@ -9,6 +9,7 @@ import { getMessage, getSuccessMessageStatus } from 'src/app/selector/auth.selec
 import { removeMessage } from 'src/app/actions/pizza-order.action';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 import { LoadingSpinnerComponent } from 'src/app/shared/loading-spinner/loading-spinner.component';
+import { LoadingAnimationModule } from 'src/app/shared/loading-animation/loading-animation.module';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ import { LoadingSpinnerComponent } from 'src/app/shared/loading-spinner/loading-
 export class LoginComponent implements OnInit {
 
   @ViewChild(LoadingSpinnerComponent) loadSpinnerEvent: LoadingSpinnerComponent;
+  // @ViewChild(LoadingSpinnerComponent) loadAnimationEvent: LoadingSpinnerComponent;
 
   constructor(
     private store: Store<PizzaAuthResponse>,

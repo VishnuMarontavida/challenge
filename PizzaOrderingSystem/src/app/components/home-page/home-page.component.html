@@ -82,3 +82,23 @@
 <app-add-pizza-order></app-add-pizza-order>
 <app-view-pizza-order></app-view-pizza-order>
 <!-- <app-loading-spinner></app-loading-spinner> -->
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':confirmationShowStatus}">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content border border-dark">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmation</h4>
+          <span aria-hidden="true" (click)="onConfirmationCloseHandled()" class="cursor-pointer lg">&times;</span>
+        </div>
+        <div class="modal-body">
+            Are you sure, you want to remove the order?
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onConfirmationCloseHandled()">Cancel</button> 
+           <button type="button" class="btn btn-primary" (click)="removePizzaOrder()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>

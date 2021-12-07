@@ -45,6 +45,17 @@ export class HomePageComponent implements OnInit {
   errorDisplay: string = 'none';
   returnMessage: string;
 
+  removingOrder: Pizza = {
+    OrderId: 0,
+    Crust: '',
+    Flavor: '',
+    Size: '',
+    Table_No: 0,
+    Image: ''
+  };
+
+  confirmationShowStatus: string = "none";
+
   ngOnInit(): void {
     //Now getting the pizza orders.
     this.loadOrderList();
@@ -60,16 +71,16 @@ export class HomePageComponent implements OnInit {
       }
     });
 
-    this.communication.spinnerAnimationCalled$.subscribe((status: boolean) => {
-      if (!status)
-        this.loadSpinnerEvent.hideLoadingAnimation();
-      else
-        this.loadSpinnerEvent.showLoadingAnimation();
-    });
+    // this.communication.spinnerAnimationCalled$.subscribe((status: boolean) => {
+    //   if (!status)
+    //     this.loadSpinnerEvent.hideLoadingAnimation();
+    //   else
+    //     this.loadSpinnerEvent.showLoadingAnimation();
+    // });
   }
 
   loadOrderList() {
-    this.loadSpinnerEvent.showLoadingAnimation();
+    // this.loadSpinnerEvent.showLoadingAnimation();
     this.pizzaOrders = this.store.select(allOrders);
     this.store.dispatch(loadPizzaOrders());
 
@@ -81,11 +92,39 @@ export class HomePageComponent implements OnInit {
 
   //Used to Remove the Pizza Order data from the server side.
   onOderRemove(order: Pizza) {
-    if (confirm('Are you sure, you want to remove the order?')) {
-      this.store.dispatch(removeOrder({ order }));
 
-      window.scrollTo(0, 0);
-    }
+    this.removingOrder = order;
+    debugger;
+    //Now show the confirmation message.
+    this.confirmationShowStatus = 'block';
+
+    // if (confirm('Are you sure, you want to remove the order?')) {
+    //   this.store.dispatch(removeOrder({ order }));
+
+    //   window.scrollTo(0, 0);
+    // }
+  }
+
+  removePizzaOrder() {
+    this.store.dispatch(removeOrder({ order: this.removingOrder }));
+
+    this.removingOrder = {
+      OrderId: 0,
+      Crust: '',
+      Flavor: '',
+      Size: '',
+      Table_No: 0,
+      Image: ''
+    };
+
+    window.scrollTo(0, 0);
+
+    this.confirmationShowStatus = 'none';
+  }
+
+  onConfirmationCloseHandled() {
+    //Now hide the confirmation message.
+    this.confirmationShowStatus = 'none';
   }
 
   //Used to View the Pizza Order data based on the selected Order.

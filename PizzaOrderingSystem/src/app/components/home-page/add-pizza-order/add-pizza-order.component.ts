@@ -14,6 +14,8 @@ import { DropdownData } from 'src/app/models/DropdownData';
 export class AddPizzaOrderComponent implements OnInit {
 
   display: string = "none";
+  confirmationShowStatus:string = 'none';
+
   flavorList: DropdownData[] = [];
   sizeList: DropdownData[] = [];
   crustList: DropdownData[] = [];
@@ -89,26 +91,40 @@ export class AddPizzaOrderComponent implements OnInit {
   //Used to insert Order
   addPizzaOrder() {
     if (this.validateOrder()) {
-      if (confirm('Are you sure, to make order?')) {
-        var tableNumber = this.pizzaOrder.Table_No.toString();
 
-        this.insertingData = {
-          Crust: this.pizzaOrder.Crust,
-          Flavor: this.pizzaOrder.Flavor,
-          Size: this.pizzaOrder.Size,
-          Table_No: Number.parseInt(tableNumber)
-        }
+      //Now show the confirmation message.
+      this.confirmationShowStatus = 'block';
 
-        var order = this.insertingData;
-        this.store.dispatch(addOrder({ order }));
-
-        //Clearing the control values.
-        this.setInitialData();
-
-        //Closing the popup
-        this.display = "none";
-      }
     }
+  }
+
+  insertNewPizzaOrder(){
+    var tableNumber = this.pizzaOrder.Table_No.toString();
+
+    this.insertingData = {
+      Crust: this.pizzaOrder.Crust,
+      Flavor: this.pizzaOrder.Flavor,
+      Size: this.pizzaOrder.Size,
+      Table_No: Number.parseInt(tableNumber)
+    }
+
+    var order = this.insertingData;
+    this.store.dispatch(addOrder({ order }));
+
+    //Clearing the control values.
+    this.setInitialData();
+
+    //Closing the confirmation
+    this.confirmationShowStatus = 'none';
+
+    //Closing the popup
+    this.display = "none";
+
+  }
+
+  onConfirmationCloseHandled(){
+     //Now hide the confirmation message.
+    this.confirmationShowStatus = 'none';
   }
 
   //Used to valdate the inseting value.

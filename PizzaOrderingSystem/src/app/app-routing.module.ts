@@ -9,7 +9,8 @@ const routes: Routes = [
   {
     path: 'homePage', loadChildren: () => import('./components/home-page/home-page.module').then(m => m.HomePageModule)
     , canActivate: [AuthGuard]
-  }
+  },
+  { path: 'loading-animation', loadChildren: () => import('./shared/loading-animation/loading-animation.module').then(m => m.LoadingAnimationModule) }
 ];
 
 @NgModule({
