@@ -22,12 +22,6 @@ const appReducer = createReducer(
     }),
     on(autoLogout, (state) => {
 
-        // if (action.type === 'CLEAR STATE') {
-        //     state = undefined;
-        // }
-    
-        // return appReducer(state, action);
-
         return {
             ...state,
             user: null,

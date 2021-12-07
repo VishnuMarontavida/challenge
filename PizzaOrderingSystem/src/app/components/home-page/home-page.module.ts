@@ -17,14 +17,11 @@ import {HeaderComponent} from './../../shared/header/header.component';
 import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
 import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.component';
 import { ShowMessageComponent } from './../show-message/show-message.component';
-import { LoadingSpinnerComponent } from 'src/app/shared/loading-spinner/loading-spinner.component';
+import { HomeLoadingAnimationComponent } from './home-loading-animation/home-loading-animation.component';
 
 const routes: Routes = [
   {
     path: '',
-    // children: [
-    //   { path: 'add', component: AddPizzaOrderComponent }
-    // ]
   },
 ];
 
@@ -35,7 +32,7 @@ const routes: Routes = [
     AddPizzaOrderComponent,
     ViewPizzaOrderComponent,
     ShowMessageComponent,
-    // LoadingSpinnerComponent
+    HomeLoadingAnimationComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +43,7 @@ const routes: Routes = [
     // StoreModule.forRoot({}),
     StoreModule.forFeature(PizzaActionTypes.Pizza_Order_List, pizzaOrdersReducer),
     EffectsModule.forFeature([PizzaOrderEffects]),
+    // LoadingAnimationModule
   ]
 })
 export class HomePageModule { }

@@ -14,7 +14,9 @@ import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.com
 import { ShowMessageComponent } from './../show-message/show-message.component';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 import { MessageData } from 'src/app/models/MessagingData';
-import { LoadingSpinnerComponent } from 'src/app/shared/loading-spinner/loading-spinner.component';
+// import { LoadingAnimationComponent } from 'src/app/shared/loading-animation/loading-animation.component';
+// import { LoadingAnimationModule } from 'src/app/shared/loading-animation/loading-animation.module';
+import { HomeLoadingAnimationComponent } from './home-loading-animation/home-loading-animation.component';
 
 @Component({
   selector: 'app-home-page',
@@ -25,7 +27,10 @@ export class HomePageComponent implements OnInit {
 
   @ViewChild(AddPizzaOrderComponent) addOrderModal: AddPizzaOrderComponent;
   @ViewChild(ViewPizzaOrderComponent) viewOrderModal: ViewPizzaOrderComponent;
-  @ViewChild(LoadingSpinnerComponent) loadSpinnerEvent: LoadingSpinnerComponent;
+  // @ViewChild(LoadingAnimationModule) loadSpinnerEvent: LoadingAnimationModule;
+  // @ViewChild(LoadingAnimationComponent, { static: true }) loadSpinnerEvent: LoadingAnimationComponent;
+  @ViewChild(HomeLoadingAnimationComponent, { static: true }) loadSpinnerEvent: HomeLoadingAnimationComponent;
+
 
   constructor(
     private store: Store<OrderState>,
@@ -57,6 +62,10 @@ export class HomePageComponent implements OnInit {
   confirmationShowStatus: string = "none";
 
   ngOnInit(): void {
+    
+    //Now showing the animation.
+    this.loadSpinnerEvent.showLoadingAnimation();
+
     //Now getting the pizza orders.
     this.loadOrderList();
 
@@ -71,17 +80,18 @@ export class HomePageComponent implements OnInit {
       }
     });
 
-    // this.communication.spinnerAnimationCalled$.subscribe((status: boolean) => {
-    //   if (!status)
-    //     this.loadSpinnerEvent.hideLoadingAnimation();
-    //   else
-    //     this.loadSpinnerEvent.showLoadingAnimation();
-    // });
+    this.communication.spinnerAnimationCalled$.subscribe((status: boolean) => {
+      if (!status)
+        this.loadSpinnerEvent.hideLoadingAnimation();
+      else
+        this.loadSpinnerEvent.showLoadingAnimation();
+    });
   }
 
   loadOrderList() {
     // this.loadSpinnerEvent.showLoadingAnimation();
     this.pizzaOrders = this.store.select(allOrders);
+    
     this.store.dispatch(loadPizzaOrders());
 
     //Getting the message stored on the state.
@@ -94,18 +104,16 @@ export class HomePageComponent implements OnInit {
   onOderRemove(order: Pizza) {
 
     this.removingOrder = order;
-    debugger;
+
     //Now show the confirmation message.
     this.confirmationShowStatus = 'block';
-
-    // if (confirm('Are you sure, you want to remove the order?')) {
-    //   this.store.dispatch(removeOrder({ order }));
-
-    //   window.scrollTo(0, 0);
-    // }
   }
 
   removePizzaOrder() {
+    
+    //Now showing the animation.
+    this.loadSpinnerEvent.showLoadingAnimation();
+
     this.store.dispatch(removeOrder({ order: this.removingOrder }));
 
     this.removingOrder = {

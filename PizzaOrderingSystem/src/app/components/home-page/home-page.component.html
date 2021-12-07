@@ -60,7 +60,7 @@
                     <td class="text-break">{{ order.Flavor }}</td>
                     <td class="text-break">
                         <!-- {{ order.Image }} -->
-                        <img src="{{ order.Image }}" class="height100">
+                        <img src="{{ order.Image }}" class="height100 width150">
                     </td>
                     <td class="text-break text-center">{{ order.Size }}</td>
                     <td class="text-center">{{ order.Table_No }}</td>
@@ -81,7 +81,9 @@
 
 <app-add-pizza-order></app-add-pizza-order>
 <app-view-pizza-order></app-view-pizza-order>
-<!-- <app-loading-spinner></app-loading-spinner> -->
+<!-- <app-loading-animation></app-loading-animation> -->
+
+<app-home-loading-animation></app-home-loading-animation>
 
 
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':confirmationShowStatus}">

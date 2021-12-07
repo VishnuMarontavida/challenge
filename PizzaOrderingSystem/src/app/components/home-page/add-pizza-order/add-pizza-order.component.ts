@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pizza, PizzaInsertData } from 'src/app/models/Pizza';
 import { Store } from '@ngrx/store';
 import { addOrder } from 'src/app/actions/pizza-order.action';
 import { Observable } from 'rxjs';
 import { DropdownData } from 'src/app/models/DropdownData';
+import { HomeLoadingAnimationComponent } from './../home-loading-animation/home-loading-animation.component';
+import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 
 @Component({
   selector: 'app-add-pizza-order',
@@ -13,6 +15,8 @@ import { DropdownData } from 'src/app/models/DropdownData';
 })
 export class AddPizzaOrderComponent implements OnInit {
 
+  @ViewChild(HomeLoadingAnimationComponent) loadSpinnerEvent: HomeLoadingAnimationComponent;
+
   display: string = "none";
   confirmationShowStatus:string = 'none';
 
@@ -20,7 +24,10 @@ export class AddPizzaOrderComponent implements OnInit {
   sizeList: DropdownData[] = [];
   crustList: DropdownData[] = [];
 
-  constructor(private store: Store<Pizza>) { }
+  constructor(
+    private store: Store<Pizza>,
+    private communication: CommunicationService
+    ) { }
 
   pizzaOrder: PizzaInsertData = {
     Crust: '',
@@ -43,6 +50,13 @@ export class AddPizzaOrderComponent implements OnInit {
   ngOnInit(): void {
     //Load the initial data for the Add order page.
     this.setInitialData();
+
+    this.communication.spinnerAnimationCalled$.subscribe((status: boolean) => {
+      if (!status)
+        this.loadSpinnerEvent.hideLoadingAnimation();
+      else
+        this.loadSpinnerEvent.showLoadingAnimation();
+    });
   }
 
   setInitialData() {
@@ -95,10 +109,15 @@ export class AddPizzaOrderComponent implements OnInit {
       //Now show the confirmation message.
       this.confirmationShowStatus = 'block';
 
+      
     }
   }
 
   insertNewPizzaOrder(){
+    
+    //Now showing the animation.
+    this.loadSpinnerEvent.showLoadingAnimation();
+
     var tableNumber = this.pizzaOrder.Table_No.toString();
 
     this.insertingData = {

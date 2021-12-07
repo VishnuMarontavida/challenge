@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-loading-animation',
-  templateUrl: './loading-animation.component.html',
-  styleUrls: ['./loading-animation.component.scss']
+  selector: 'app-home-loading-animation',
+  templateUrl: './home-loading-animation.component.html',
+  styleUrls: ['./home-loading-animation.component.scss']
 })
-export class LoadingAnimationComponent implements OnInit {
+export class HomeLoadingAnimationComponent implements OnInit {
 
   showLoadingStatus: boolean = false;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   showLoadingAnimation() {

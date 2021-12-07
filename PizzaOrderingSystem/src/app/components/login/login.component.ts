@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 import { getMessage, getSuccessMessageStatus } from 'src/app/selector/auth.selector';
 import { removeMessage } from 'src/app/actions/pizza-order.action';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
-import { LoadingSpinnerComponent } from 'src/app/shared/loading-spinner/loading-spinner.component';
-import { LoadingAnimationModule } from 'src/app/shared/loading-animation/loading-animation.module';
+import { LoadingSpinnerComponent } from 'src/app/components/login/loading-spinner/loading-spinner.component';
+// import { LoadingAnimationModule } from 'src/app/shared/loading-animation/loading-animation.module';
 
 @Component({
   selector: 'app-login',
