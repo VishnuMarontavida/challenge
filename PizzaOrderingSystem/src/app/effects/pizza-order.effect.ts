@@ -81,7 +81,7 @@ export class PizzaOrderEffects {
             // this.communication.callHomeMethod('Session expired, Logout and try again', false);
             
             this.router.navigate(['/login']);
-            // this.authService.removeSessionValue();
+            this.authService.removeSessionValue();
             
             this.communication.callLoginErrorMethod('Session expired, Login and try again');
 
