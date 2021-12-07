@@ -37,6 +37,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     //Getting the message stored on the state.
     this.message = this.store.select(getMessage);
+
+    //Now check this message variable have value or not.
+    this.checkMessageShowStatus();
+
     this.SuccessMessageStatus = this.store.select(getSuccessMessageStatus);
 
     this.communication.loginMethodCalled$.subscribe((message: string) => {
@@ -55,6 +59,17 @@ export class LoginComponent implements OnInit {
       else
         this.loadSpinnerEvent.showLoadingAnimation();
     });
+  }
+
+  //Used to check the Login State message property have value or not.
+  checkMessageShowStatus() {
+    debugger;
+    if (this.message) {
+      setTimeout(() => {
+        this.onCloseHandled();
+      }, 4000);
+      
+    }
   }
 
   //Function called on submit button click.
