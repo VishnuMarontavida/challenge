@@ -17,3 +17,8 @@ export const loginFail = createAction(
 );
 
 export const autoLogout = createAction(PizzaActionTypes.LOGOUT_ACTION);
+
+export const addOrderFailedStatus = createAction(
+  PizzaActionTypes.ADD_ORDER_FAIL,
+  props<{ message: string }>()
+);

@@ -1,4 +1,3 @@
-
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
   <div class="modal-dialog" role="document">
     <div class="modal-content border border-dark">
@@ -11,12 +10,22 @@
 
         <div class="container">
           <div class="row p-2">
+
+            <div class="col-sm">
+              <div class="alert alert-success text-center" role="alert" [ngStyle]="{ display: successDisplay }"> {{
+                returnMessage }} </div>
+              <div class="alert alert-danger text-center" role="alert" [ngStyle]="{ display: errorDisplay }"> {{
+                returnMessage }} </div>
+            </div>
+
+          </div>
+          <div class="row p-2">
             <div class="col-4 text-end">
               <b>Crust :</b>
             </div>
             <div class="col-8">
-             
-              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Crust">
+
+              <select class="form-select form-select-sm "  tabindex="1" [(ngModel)]="pizzaOrder.Crust">
                 <option *ngFor="let crust of crustList" [ngValue]="crust.value">
                   {{ crust.text }}
                 </option>
@@ -28,7 +37,7 @@
               <b>Flavor :</b>
             </div>
             <div class="col-8">
-              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Flavor">
+              <select class="form-select form-select-sm "  tabindex="2" [(ngModel)]="pizzaOrder.Flavor">
                 <option *ngFor="let flavor of flavorList" [ngValue]="flavor.value">
                   {{ flavor.text }}
                 </option>
@@ -40,7 +49,7 @@
               <b>Size :</b>
             </div>
             <div class="col-8">
-              <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Size">
+              <select class="form-select form-select-sm "  tabindex="3" [(ngModel)]="pizzaOrder.Size">
                 <option *ngFor="let size of sizeList" [ngValue]="size.value">
                   {{ size.text }}
                 </option>
@@ -52,16 +61,38 @@
               <b>Table No. :</b>
             </div>
             <div class="col-8">
-              <input type="text" class="form-control" [(ngModel)]="pizzaOrder.Table_No" maxlength="1" (keypress)="isNumber($event)"/>
+              <input type="text" class="form-control"  tabindex="4" [(ngModel)]="pizzaOrder.Table_No" maxlength="1"
+                (keypress)="isNumber($event)" />
             </div>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="addPizzaOrder()">Submit</button>
-        <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Close</button>
+        <button type="button" class="btn btn-primary" tabindex="5" (click)="addPizzaOrder()">Submit</button>
+        <button type="button" class="btn btn-secondary"  tabindex="8" (click)="onCloseHandled()">Close</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':confirmationShowStatus}">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content border border-dark">
+      <div class="modal-header confirmationHeaderStyle">
+        <h4 class="modal-title">Confirmation</h4>
+        <span aria-hidden="true" (click)="onConfirmationCloseHandled()" class="cursor-pointer lg">&times;</span>
+      </div>
+      <div class="modal-body">
+        Are you sure, to make order?
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" tabindex="7" (click)="onConfirmationCloseHandled()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="insertOrderButton" tabindex="6" (click)="insertNewPizzaOrder()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-home-loading-animation></app-home-loading-animation>

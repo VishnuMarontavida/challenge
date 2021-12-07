@@ -1,5 +1,10 @@
 .tableWidthStyle{
-    width: 80%;
+    width: 82%;
+    // background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    background-color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 3px;
 }
 
 .width50{
@@ -13,4 +18,20 @@
 }
 .width100{
     width: 100px;
+}
+.width200{
+    width: 200px;
+}
+.height100{
+    height: 100px;
+}
+.backgroundColor{
+    background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 57px;
+}
+
+.modal{
+    background-color: rgb(218 221 224 / 74%);
 }

@@ -44,11 +44,7 @@ export class AuthService {
         localStorage.setItem('userData', JSON.stringify(user));
     }
 
-    logout() {
+    removeSessionValue() {
         localStorage.removeItem('userData');
-        if (this.timeoutInterval) {
-            clearTimeout(this.timeoutInterval);
-            this.timeoutInterval = null;
-        }
     }
 }

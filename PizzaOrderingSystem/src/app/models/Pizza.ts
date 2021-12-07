@@ -4,6 +4,7 @@ export class Pizza {
     Flavor: string = '';
     Size: string = '';
     Table_No: number = 0;
+    Image:string='';
 }
 
 export class PizzaInsertData {

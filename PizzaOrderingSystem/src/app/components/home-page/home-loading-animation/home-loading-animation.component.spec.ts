@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ShowMessageComponent } from './show-message.component';
+import { HomeLoadingAnimationComponent } from './home-loading-animation.component';
 
-describe('ShowMessageComponent', () => {
-  let component: ShowMessageComponent;
-  let fixture: ComponentFixture<ShowMessageComponent>;
+describe('HomeLoadingAnimationComponent', () => {
+  let component: HomeLoadingAnimationComponent;
+  let fixture: ComponentFixture<HomeLoadingAnimationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowMessageComponent ]
+      declarations: [ HomeLoadingAnimationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShowMessageComponent);
+    fixture = TestBed.createComponent(HomeLoadingAnimationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

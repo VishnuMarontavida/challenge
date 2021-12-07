@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { pizzaAPIs } from '../env-config';
+import { PizzaImageTypes } from '../shared/enum/pizza-image-types.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +33,15 @@ export class OrderService {
               Crust: data[key].Crust,
               Flavor: data[key].Flavor,
               Size: data[key].Size,
-              Table_No: tableNumber
+              Table_No: tableNumber,
+              Image: ''
             }
+
+            order.Image = this.getPizzaImage(order.Crust, order.Flavor);
+
             orders.push(order);
           }
+          
           return orders;
         })
       );
@@ -47,13 +53,21 @@ export class OrderService {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     };
 
-    return this.http.post<Pizza>(pizzaAPIs.orderGetAndPost, order, httpOptions);
+    return this.http.post<Pizza>(pizzaAPIs.orderGetAndPost, order, httpOptions)
+      .pipe(
+        map((addedOrder: Pizza) => {
+
+          addedOrder.Image = this.getPizzaImage(addedOrder.Crust, addedOrder.Flavor);
+
+          return addedOrder;
+        })
+      );
   }
 
   removePizzaOrder(order: Pizza): Observable<string> {
 
     const apiURL: string = pizzaAPIs.orderGetAndPost + '/' + order.OrderId;
-    
+
     return this.http
       .delete<any>(apiURL)
       .pipe(
@@ -69,6 +83,17 @@ export class OrderService {
       var userData = JSON.parse(loggedinUserData);
       if (userData)
         return userData.access_token;
+    }
+  }
+
+  getPizzaImage(crust: string, flavor: string): string {
+    switch (flavor.toUpperCase()) {
+      case PizzaImageTypes.Cheese.toUpperCase(): return PizzaImageTypes.CheeseImage;
+      case PizzaImageTypes.Veggie.toUpperCase(): return PizzaImageTypes.VeggieImage;
+      case PizzaImageTypes.Pepperoni.toUpperCase(): return PizzaImageTypes.PepperoniImage;
+      case PizzaImageTypes.Meat.toUpperCase(): return PizzaImageTypes.MeatImage;
+      case PizzaImageTypes.Margherita.toUpperCase(): return PizzaImageTypes.MargheritaImage;
+      default: return PizzaImageTypes.CheeseImage;
     }
   }
 }

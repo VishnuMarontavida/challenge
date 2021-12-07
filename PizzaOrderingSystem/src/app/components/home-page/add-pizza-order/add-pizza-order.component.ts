@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pizza, PizzaInsertData } from 'src/app/models/Pizza';
 import { Store } from '@ngrx/store';
 import { addOrder } from 'src/app/actions/pizza-order.action';
 import { Observable } from 'rxjs';
 import { DropdownData } from 'src/app/models/DropdownData';
+import { HomeLoadingAnimationComponent } from './../home-loading-animation/home-loading-animation.component';
+import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 
 @Component({
   selector: 'app-add-pizza-order',
@@ -13,12 +15,19 @@ import { DropdownData } from 'src/app/models/DropdownData';
 })
 export class AddPizzaOrderComponent implements OnInit {
 
+  @ViewChild(HomeLoadingAnimationComponent) loadSpinnerEvent: HomeLoadingAnimationComponent;
+
   display: string = "none";
+  confirmationShowStatus:string = 'none';
+
   flavorList: DropdownData[] = [];
   sizeList: DropdownData[] = [];
   crustList: DropdownData[] = [];
 
-  constructor(private store: Store<Pizza>) { }
+  constructor(
+    private store: Store<Pizza>,
+    private communication: CommunicationService
+    ) { }
 
   pizzaOrder: PizzaInsertData = {
     Crust: '',
@@ -34,11 +43,20 @@ export class AddPizzaOrderComponent implements OnInit {
     Table_No: 0
   };
 
-  insertedData: Observable<Pizza[]>;
+  successDisplay: string = 'none';
+  errorDisplay: string = 'none';
+  returnMessage: string;
 
   ngOnInit(): void {
     //Load the initial data for the Add order page.
     this.setInitialData();
+
+    this.communication.spinnerAnimationCalled$.subscribe((status: boolean) => {
+      if (!status)
+        this.loadSpinnerEvent.hideLoadingAnimation();
+      else
+        this.loadSpinnerEvent.showLoadingAnimation();
+    });
   }
 
   setInitialData() {
@@ -87,34 +105,61 @@ export class AddPizzaOrderComponent implements OnInit {
   //Used to insert Order
   addPizzaOrder() {
     if (this.validateOrder()) {
-      if (confirm('Are you sure, to make order?')) {
-        var tableNumber = this.pizzaOrder.Table_No.toString();
 
-        this.insertingData = {
-          Crust: this.pizzaOrder.Crust,
-          Flavor: this.pizzaOrder.Flavor,
-          Size: this.pizzaOrder.Size,
-          Table_No: Number.parseInt(tableNumber)
-        }
+      //Now show the confirmation message.
+      this.confirmationShowStatus = 'block';
 
-        var order = this.insertingData;
-        this.store.dispatch(addOrder({ order }));
-
-        //Clearing the control values.
-        this.setInitialData();
-
-        //Closing the popup
-        this.display = "none";
-      }
+      
     }
+  }
+
+  insertNewPizzaOrder(){
+    
+    //Now showing the animation.
+    this.loadSpinnerEvent.showLoadingAnimation();
+
+    var tableNumber = this.pizzaOrder.Table_No.toString();
+
+    this.insertingData = {
+      Crust: this.pizzaOrder.Crust,
+      Flavor: this.pizzaOrder.Flavor,
+      Size: this.pizzaOrder.Size,
+      Table_No: Number.parseInt(tableNumber)
+    }
+
+    var order = this.insertingData;
+    this.store.dispatch(addOrder({ order }));
+
+    //Clearing the control values.
+    this.setInitialData();
+
+    //Closing the confirmation
+    this.confirmationShowStatus = 'none';
+
+    //Closing the popup
+    this.display = "none";
+
+  }
+
+  onConfirmationCloseHandled(){
+     //Now hide the confirmation message.
+    this.confirmationShowStatus = 'none';
   }
 
   //Used to valdate the inseting value.
   validateOrder() {
     if (this.pizzaOrder.Table_No == 0) {
 
-      //Now need to show the error message.
-      alert('Enter table number.')
+      //Used to show the error message.
+      this.errorDisplay = 'block';
+      this.returnMessage = 'Enter table number';
+      setTimeout(() => {
+        this.errorDisplay = 'none';
+      }, 4000);
+
+
+      
+      // alert('Enter table number.')
 
       return false;
     }
