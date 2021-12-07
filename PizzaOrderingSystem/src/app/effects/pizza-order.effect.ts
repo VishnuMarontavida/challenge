@@ -47,6 +47,7 @@ export class PizzaOrderEffects {
         if (!orders.length || orders.length === 1) {
           return this.orderService.getOrders().pipe(
             map((OrderList) => {
+              
               //Now sorting the array by Order Id Ascending.
               OrderList = OrderList.sort((n1: any, n2: any) => n1.OrderId - n2.OrderId);
               //Finally returning the status.
@@ -84,6 +85,7 @@ export class PizzaOrderEffects {
       mergeMap((action) => {
         return this.orderService.removePizzaOrder(action.order).pipe(
           map((data: any) => {
+            
             //Getting the status after deleting the order.
             return removeOrderSuccess({ order: action.order });
           }),

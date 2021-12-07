@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DropdownData } from 'src/app/models/DropdownData';
 import { Pizza, PizzaInsertData } from 'src/app/models/Pizza';
 
 @Component({
@@ -9,25 +10,19 @@ import { Pizza, PizzaInsertData } from 'src/app/models/Pizza';
 export class ViewPizzaOrderComponent implements OnInit {
 
   display: string = "none";
-  flavorList: any = [];
-  sizeList: any = [];
-  crustList: any = [];
+  flavorList: DropdownData[] = [];
+  sizeList: DropdownData[] = [];
+  crustList: DropdownData[] = [];
 
   constructor() { }
 
-  pizzaOrder: PizzaInsertData = {
+  pizzaOrder: Pizza = {
     Crust: '',
     Flavor: '',
     Size: '',
-    Table_No: 0
+    Table_No: 0,
+    OrderId: 0
   }
-
-  insertingData: PizzaInsertData = {
-    Crust: '',
-    Flavor: '',
-    Size: '',
-    Table_No: 0
-  };
 
   ngOnInit() {
     //Load the initial data for the Add order page.
@@ -78,11 +73,12 @@ export class ViewPizzaOrderComponent implements OnInit {
   }
 
   setControlValues(orderData: Pizza) {
-    this.pizzaOrder={
-      Crust:orderData.Crust,
-      Flavor:orderData.Flavor,
-      Size:orderData.Size,
-      Table_No:orderData.Table_No,
+    this.pizzaOrder = {
+      Crust: orderData.Crust,
+      Flavor: orderData.Flavor,
+      Size: orderData.Size,
+      Table_No: orderData.Table_No,
+      OrderId: orderData.OrderId
     }
   }
 

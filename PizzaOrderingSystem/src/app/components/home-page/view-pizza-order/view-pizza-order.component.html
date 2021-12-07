@@ -1,4 +1,3 @@
-
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
   <div class="modal-dialog" role="document">
     <div class="modal-content border border-dark">
@@ -7,14 +6,22 @@
         <span aria-hidden="true" (click)="onCloseViewDetailModal()" class="cursor-pointer lg">&times;</span>
       </div>
       <div class="modal-body">
-       
+
         <div class="container">
+          <div class="row p-2">
+            <div class="col-4 text-end">
+              <b>Order ID :</b>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" [(ngModel)]="pizzaOrder.OrderId" maxlength="1" disabled />
+            </div>
+          </div>
           <div class="row p-2">
             <div class="col-4 text-end">
               <b>Crust :</b>
             </div>
             <div class="col-8">
-             
+
               <select class="form-select form-select-sm " [(ngModel)]="pizzaOrder.Crust" disabled>
                 <option *ngFor="let crust of crustList" [ngValue]="crust.value">
                   {{ crust.text }}

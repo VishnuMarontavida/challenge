@@ -72,6 +72,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(autoLogout),
         map((action) => {
+          
           this.authService.logout();
           this.router.navigate(['login']);
         })
