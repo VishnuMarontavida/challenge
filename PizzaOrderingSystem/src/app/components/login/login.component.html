@@ -1,17 +1,13 @@
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
-			<!-- <h3>{{ message | async }}</h3> -->
+			<!-- Showing Session out message -->
 			<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="message | async as actionMessage">
 				{{ actionMessage }}
 				<button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseHandled()" aria-label="Close"></button>
 			</div>
 
-			
-			<!-- <div class="col-sm" *ngIf="message | async as actionMessage">
-				<div class="alert alert-danger text-center" role="alert" [ngStyle]="{ display: errorDisplay }"> {{
-					returnMessage }} </div>
-			</div> -->
+			<!-- Used to show error message-->
 			<div class="col-sm">
 				<div class="alert alert-danger text-center" role="alert" [ngStyle]="{ display: errorDisplay }"> {{
 					returnMessage }} </div>
@@ -42,4 +38,3 @@
 </div>
 
 <app-loading-spinner></app-loading-spinner>
-<!-- <app-loading-animation></app-loading-animation> -->

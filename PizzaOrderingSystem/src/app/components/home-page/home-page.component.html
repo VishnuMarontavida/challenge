@@ -8,24 +8,6 @@
         </div>
 
         <!-- Used to show bot success and error message.-->
-        <!-- <div *ngIf="messageData | async as actionMessage;">
-            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert"
-                *ngIf="actionMessage.SuccessMessageStatus==true && actionMessage.Message!=''; else errorMessage">
-                {{ actionMessage.Message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()"
-                    aria-label="Close"></button>
-            </div>
-
-            <ng-template #errorMessage>
-                <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert"
-                    *ngIf="actionMessage.Message!=''">
-                    {{ actionMessage.Message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseMessage()"
-                        aria-label="Close"></button>
-                </div>
-            </ng-template>
-        </div> -->
-
         <div class="col-sm">
             <div class="alert alert-success text-center" role="alert" [ngStyle]="{ display: successDisplay }"> {{
                 returnMessage }} </div>
@@ -81,11 +63,10 @@
 
 <app-add-pizza-order></app-add-pizza-order>
 <app-view-pizza-order></app-view-pizza-order>
-<!-- <app-loading-animation></app-loading-animation> -->
 
 <app-home-loading-animation></app-home-loading-animation>
 
-
+<!-- Used to show the confirmation -->
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':confirmationShowStatus}">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content border border-dark">

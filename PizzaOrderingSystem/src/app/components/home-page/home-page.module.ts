@@ -16,7 +16,6 @@ import {HeaderComponent} from './../../shared/header/header.component';
 
 import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
 import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.component';
-import { ShowMessageComponent } from './../show-message/show-message.component';
 import { HomeLoadingAnimationComponent } from './home-loading-animation/home-loading-animation.component';
 
 const routes: Routes = [
@@ -31,7 +30,6 @@ const routes: Routes = [
     HeaderComponent,
     AddPizzaOrderComponent,
     ViewPizzaOrderComponent,
-    ShowMessageComponent,
     HomeLoadingAnimationComponent
   ],
   imports: [

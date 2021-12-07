@@ -1,21 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { delay, take, tap } from 'rxjs/operators';
-import { autoLogout } from 'src/app/actions/pizza-auth.action';
 import { loadPizzaOrders, removeMessage, removeOrder } from 'src/app/actions/pizza-order.action';
 import { Pizza } from 'src/app/models/Pizza';
 import { allOrders, getMessageData } from 'src/app/selector/pizza-order.selector';
-import { setLoadingSpinner } from 'src/app/shared/state/shared.actions';
-import { PizzaActionTypes } from 'src/app/shared/enum/pizza-action-types.enum';
 import { OrderState } from 'src/app/state/pizza-order.state';
 import { AddPizzaOrderComponent } from './add-pizza-order/add-pizza-order.component';
 import { ViewPizzaOrderComponent } from './view-pizza-order/view-pizza-order.component';
-import { ShowMessageComponent } from './../show-message/show-message.component';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 import { MessageData } from 'src/app/models/MessagingData';
-// import { LoadingAnimationComponent } from 'src/app/shared/loading-animation/loading-animation.component';
-// import { LoadingAnimationModule } from 'src/app/shared/loading-animation/loading-animation.module';
 import { HomeLoadingAnimationComponent } from './home-loading-animation/home-loading-animation.component';
 
 @Component({
@@ -27,8 +20,6 @@ export class HomePageComponent implements OnInit {
 
   @ViewChild(AddPizzaOrderComponent) addOrderModal: AddPizzaOrderComponent;
   @ViewChild(ViewPizzaOrderComponent) viewOrderModal: ViewPizzaOrderComponent;
-  // @ViewChild(LoadingAnimationModule) loadSpinnerEvent: LoadingAnimationModule;
-  // @ViewChild(LoadingAnimationComponent, { static: true }) loadSpinnerEvent: LoadingAnimationComponent;
   @ViewChild(HomeLoadingAnimationComponent, { static: true }) loadSpinnerEvent: HomeLoadingAnimationComponent;
 
 
@@ -96,8 +87,6 @@ export class HomePageComponent implements OnInit {
 
     //Getting the message stored on the state.
     this.messageData = this.store.select(getMessageData);
-    // this.SuccessMessageStatus = this.store.select(getSuccessMessageStatus);
-    // this.ErrorMessageStatus = this.store.select(getErrorMessageStatus);
   }
 
   //Used to Remove the Pizza Order data from the server side.

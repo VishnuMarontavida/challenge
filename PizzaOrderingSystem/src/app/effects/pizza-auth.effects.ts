@@ -1,5 +1,4 @@
 import {
-  setLoadingSpinner,
   setErrorMessage,
 } from '../shared/state/shared.actions';
 
@@ -14,7 +13,6 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Pizza } from '../models/Pizza';
-import { LoginData } from '../models/LoginData';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 
 @Injectable()

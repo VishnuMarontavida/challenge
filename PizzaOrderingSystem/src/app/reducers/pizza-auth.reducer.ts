@@ -32,10 +32,6 @@ const appReducer = createReducer(
 		return {
 			...state,
 			Message: action.message,
-			// MessageData:{
-			// 	SuccessMessageStatus: false,
-			// 	Message: action.message
-			// },
 			LoadingStatus: false
 		};
 	}),

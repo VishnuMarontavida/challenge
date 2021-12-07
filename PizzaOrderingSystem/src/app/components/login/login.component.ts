@@ -1,4 +1,3 @@
-import { setLoadingSpinner } from './../../shared/state/shared.actions';
 import { loginStart } from '../../actions/pizza-auth.action';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -9,7 +8,6 @@ import { getMessage, getSuccessMessageStatus } from 'src/app/selector/auth.selec
 import { removeMessage } from 'src/app/actions/pizza-order.action';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 import { LoadingSpinnerComponent } from 'src/app/components/login/loading-spinner/loading-spinner.component';
-// import { LoadingAnimationModule } from 'src/app/shared/loading-animation/loading-animation.module';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +17,6 @@ import { LoadingSpinnerComponent } from 'src/app/components/login/loading-spinne
 export class LoginComponent implements OnInit {
 
   @ViewChild(LoadingSpinnerComponent) loadSpinnerEvent: LoadingSpinnerComponent;
-  // @ViewChild(LoadingSpinnerComponent) loadAnimationEvent: LoadingSpinnerComponent;
 
   constructor(
     private store: Store<PizzaAuthResponse>,
@@ -43,6 +40,7 @@ export class LoginComponent implements OnInit {
 
     this.SuccessMessageStatus = this.store.select(getSuccessMessageStatus);
 
+    //Now setting the error message based on the effect setting.
     this.communication.loginMethodCalled$.subscribe((message: string) => {
       if (message) {
         this.returnMessage = message;
