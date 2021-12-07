@@ -22,6 +22,8 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { allOrders } from '../selector/pizza-order.selector';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class PizzaOrderEffects {
@@ -29,7 +31,9 @@ export class PizzaOrderEffects {
     private actions$: Actions,
     private orderService: OrderService,
     private store: Store<Pizza>,
-    private communication: CommunicationService
+    private communication: CommunicationService,
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   loadOrders$ = createEffect(() => {
@@ -73,9 +77,14 @@ export class PizzaOrderEffects {
             //Hide the loading animation.
             this.communication.loadSpinnerAnimation(false);
 
-            this.communication.callHomeMethod('Session expired, Logout and try again', false);
+            // this.communication.callHomeMethod('Session expired, Logout and try again', false);
+            this.communication.callLoginErrorMethod('Session expired, Login and try again');
+
+            this.router.navigate(['/login']);
+            this.authService.removeSessionValue();
+
             //Now calling the fail action
-            return of(addOrderFailed({ message: 'Session expired, Logout and try again' }));
+            return of(addOrderFailed({ message: 'Session expired, Login and try again' }));
           })
         );
       })
@@ -104,6 +113,7 @@ export class PizzaOrderEffects {
             this.communication.loadSpinnerAnimation(false);
 
             this.communication.callHomeMethod('Oops. Can\'t perform order remove', false);
+
             //Now calling the fail action
             return of(removeOrderFailed({ message: 'Oops. Can\'t perform order remove' }));
           })
