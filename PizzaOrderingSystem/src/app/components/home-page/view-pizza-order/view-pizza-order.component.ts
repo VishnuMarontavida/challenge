@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DropdownData } from 'src/app/models/DropdownData';
 import { Pizza, PizzaInsertData } from 'src/app/models/Pizza';
 
 @Component({
@@ -9,9 +10,9 @@ import { Pizza, PizzaInsertData } from 'src/app/models/Pizza';
 export class ViewPizzaOrderComponent implements OnInit {
 
   display: string = "none";
-  flavorList: any = [];
-  sizeList: any = [];
-  crustList: any = [];
+  flavorList: DropdownData[] = [];
+  sizeList: DropdownData[] = [];
+  crustList: DropdownData[] = [];
 
   constructor() { }
 
