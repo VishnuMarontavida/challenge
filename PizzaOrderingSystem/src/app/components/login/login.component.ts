@@ -32,10 +32,9 @@ export class LoginComponent implements OnInit {
 
   successDisplay: string = 'none';
   errorDisplay: string = 'none';
-  returnMessage: string;
+  returnMessage: string = '';
 
   ngOnInit(): void {
-
     //Getting the message stored on the state.
     this.message = this.store.select(getMessage);
     this.SuccessMessageStatus = this.store.select(getSuccessMessageStatus);

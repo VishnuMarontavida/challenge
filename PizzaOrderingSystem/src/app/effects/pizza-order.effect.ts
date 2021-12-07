@@ -24,6 +24,7 @@ import { allOrders } from '../selector/pizza-order.selector';
 import { CommunicationService } from 'src/app/shared/Communication/CommunicationService';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { addOrderFailedStatus } from '../actions/pizza-auth.action';
 
 @Injectable()
 export class PizzaOrderEffects {
@@ -78,13 +79,15 @@ export class PizzaOrderEffects {
             this.communication.loadSpinnerAnimation(false);
 
             // this.communication.callHomeMethod('Session expired, Logout and try again', false);
-            this.communication.callLoginErrorMethod('Session expired, Login and try again');
-
+            
             this.router.navigate(['/login']);
             this.authService.removeSessionValue();
+            
+            this.communication.callLoginErrorMethod('Session expired, Login and try again');
 
             //Now calling the fail action
-            return of(addOrderFailed({ message: 'Session expired, Login and try again' }));
+            return of(addOrderFailedStatus({ message: 'Session expired, Login and try again' }));
+            // return of(addOrderFailed({ message: 'Session expired, Login and try again' }));
           })
         );
       })

@@ -182,3 +182,7 @@ body {
     max-width: 100%;
     background: linear-gradient(90deg, #C7C5F4, #776BCC);
 }
+
+.alert-dismissible .btn-close{
+	padding: 0.7rem .7rem;
+}
