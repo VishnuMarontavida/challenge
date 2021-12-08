@@ -2,9 +2,11 @@
 	<div class="screen">
 		<div class="screen__content">
 			<!-- Showing Session out message -->
-			<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="message | async as actionMessage">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert"
+				*ngIf="message | async as actionMessage">
 				{{ actionMessage }}
-				<button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseHandled()" aria-label="Close"></button>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" (click)="onCloseHandled()"
+					aria-label="Close"></button>
 			</div>
 
 			<!-- Used to show error message-->
@@ -12,28 +14,40 @@
 				<div class="alert alert-danger text-center" role="alert" [ngStyle]="{ display: errorDisplay }"> {{
 					returnMessage }} </div>
 			</div>
-	
-			<form  class="login" (submit)="onLoginSubmit(userName.value,password.value)">
+
+			<form class="login" (submit)="onLoginFormSubmit()" [formGroup]="loginForm">
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-					<input type="text" class="login__input" placeholder="User name" title="User name" maxlength="30" #userName>
+					<input type="text" class="login__input" placeholder="User name" title="User name" maxlength="30"
+						#userName formControlName="userName">
+				</div>
+				<div *ngIf="UserName?.invalid &&(UserName?.dirty || UserName?.touched)" class="colorRed">
+					Username is mandatory
 				</div>
 				<div class="login__field">
 					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" placeholder="Password" title="Password" maxlength="30" #password>
+					<input type="password" class="login__input" placeholder="Password" title="Password" maxlength="30"
+						#password formControlName="password">
 				</div>
-				<button type="submit" class="button login__submit">
+				<div *ngIf="Password?.invalid &&(Password?.dirty || Password?.touched)" class="colorRed">
+					Password is mandatory
+				</div>
+				<button type="submit" *ngIf="!loginForm.valid" class="button login__submit disbledStyle" disabled>
 					<span class="button__text">Log In Now</span>
 					<i class="button__icon fas fa-chevron-right"></i>
-				</button>				
+				</button>
+				<button type="submit" *ngIf="loginForm.valid" class="button login__submit">
+					<span class="button__text">Log In Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
 			</form>
 		</div>
 		<div class="screen__background">
 			<span class="screen__background__shape screen__background__shape4"></span>
-			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape3"></span>
 			<span class="screen__background__shape screen__background__shape2"></span>
 			<span class="screen__background__shape screen__background__shape1"></span>
-		</div>		
+		</div>
 	</div>
 </div>
 

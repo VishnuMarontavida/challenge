@@ -17,6 +17,7 @@ import { LoadingSpinnerComponent } from 'src/app/components/login/loading-spinne
     LoginRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class LoginModule { }

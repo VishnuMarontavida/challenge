@@ -93,6 +93,7 @@ body {
 
 .login__field {
 	padding: 20px 0px;	
+	padding-bottom: 10px;
 	position: relative;	
 }
 
@@ -185,4 +186,14 @@ body {
 
 .alert-dismissible .btn-close{
 	padding: 0.7rem .7rem;
+}
+
+.colorRed{
+	color:red;
+	font-size: 13px;
+}
+
+.disbledStyle{
+	color: rgba(16, 16, 16, 0.3);
+	border-color: #fff !important;
 }

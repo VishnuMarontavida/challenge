@@ -15,7 +15,7 @@ const appReducer = createReducer(
     on(loginFail, (state, action) => {
         return {
             ...state,
-            Message: action.message,
+            // Message: action.message,
             SuccessMessageStatus: false,
             user: action,
         };
